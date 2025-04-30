@@ -3,6 +3,22 @@
 A ”community-led” world cup update subscription
 service for the soccer world cup, utilizing STOMP and supporting both Thread Per Client (TPC) and Reactor. 
 
+Maven is used as the build tool for the server in this project. You will need to download and install it to compile it.
+
+Build the server from server's root directory using: mvn compile
+ 
+ • Thread per client server:
+ 
+ mvn exec:java-Dexec.mainClass="bgu.spl.net.impl.stomp.StompServer"-Dexec.args="<port> tpc"
+ 
+ • Reactor server:
+ 
+ mvn exec:java-Dexec.mainClass="bgu.spl.net.impl.stomp.StompServer"-Dexec.args="<port> reactor"
+
+ Build the client from the client's root directory using the makefile. The output executable is called StompWCIClient.
+ 
+ Run the client with ./bin/StompWCIClient in the client root folder.
+
 ## Client commands:
 
 For any command below requiring a game_name input: game_name for a game
