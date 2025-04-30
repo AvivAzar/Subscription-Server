@@ -71,27 +71,38 @@ Example:
 ### Exit Game Channel command
 
 ○ Structure: exit {game_name}
+
 ○ For this command an UNSUBSCRIBE frame is sent to the {game_name}
 topic.
+
 ○ As a result, a RECIEPT will be returned to the client. A message
 ”Exited channel {game_name}” will be displayed on the screen.
+
 Example:
+
 ○ Command: exit germany_spain
 
 ### Report to channel command
+
 ○ Structure: report {file}
+
 ○ For this command, the client will do the following:
+
 1. Read the provided {file} and parse the game name and events
 it contains (more on the file format in the game event section).
+
 2. Save each event on the client as a game update reported by the
 current logged-in user. You should save the events ordered by
 the time specified in them, as you will need to summarize them
 in that order in the summary command.
+
 3. Send a {SEND} frame for each game event to the {game_name}
 topic (which, as mentioned, should be parsed from within the
 file), containing all the information of the game event in its body,
 as well as the name of the {user}.
+
 An example of a SEND frame containing a report:
+
 SEND
 destination :/ spain_japan
 user : meni
@@ -113,31 +124,36 @@ e : f
 description :
 And we ’ re off !
 ^ @
+
 You should format the body of your reports as in the example
-above. A client receiving such a message will have to parse the
-information of the game event from the body.
-○ You can decide to save all the events and then send them one by one
-or send each event right after saving it.
-○ The specification on the format of game events, the game events file,
-and some information on how to save them is in the Game event
-section.
+above.
+
 Example: (with the events1_partial.json file)
 ○ Command: report events1_partial.json
 
 The game event reports will be printed in the order that they
-happened in the game, and the stats will be printed ordered lexicographically by their name. 
+happened in the game, and the stats will be printed ordered lexicographically by their name.
+
 ○ If {file} doesn’t exist, it will create it. Otherwise, it will write over its content.
+
 ○ Note that {user} can be the clients current active user. This should
 not cause a problem for this command since the client is saving every
 game event it sends.
 
 ### Logout Command
+
 ○ Structure: logout
+
 ○ This command tells the client that the user wants to log out from
 the server. The client will send a DISCONNECT to the server.
+
 ○ The server will reply with a RECEIPT frame.
+
 ○ The logout command removes the current user from all the topics.
+
 ○ Once the client receives the RECEIPT frame, it should close the socket
 and await further user commands.
+
 Example:
+
 ○ Command: logout
