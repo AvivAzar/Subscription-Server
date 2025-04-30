@@ -1,6 +1,6 @@
 # Subscription-Server
 
-a ”community-led” world cup update subscription
+A ”community-led” world cup update subscription
 service for the soccer world cup, utilizing STOMP and supporting both Thread Per Client (TPC) and Reactor. 
 
 ## Client commands:
